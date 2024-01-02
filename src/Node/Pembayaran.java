@@ -1,29 +1,21 @@
 package Node;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Transaksi {
-    public int Pembayaran;
+public class Pembayaran {
+    public int Id;
+    public int Harga;
+    public User user;
     public ArrayList<Produk> listProduk;
 
-    public Transaksi(int pembayaran, ArrayList<Produk> listProduk) {
-        Pembayaran = pembayaran;
+    public Pembayaran(int id,int harga, User user, ArrayList<Produk> listProduk) {
+        this.Harga = harga;
+        this.Id = id;
+        this.user = user;
         this.listProduk = listProduk;
     }
 
-    public int getPembayaran() {
-        return Pembayaran;
-    }
-
-    public void setPembayaran(int pembayaran) {
-        Pembayaran = pembayaran;
-    }
-
-    public ArrayList<Produk> getListProduk() {
-        return listProduk;
-    }
-
-    public void setListProduk(ArrayList<Produk> listProduk) {
-        this.listProduk = listProduk;
+    public void viewBayar(){
+        System.out.println("");
     }
 }

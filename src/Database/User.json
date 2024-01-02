@@ -1,17 +1,16 @@
 [
   {
-    "PASSWORD": "23",
-    "USERNAME": "melu",
-    "ID": 1
+    "ID": 1,
+    "saldo": 50000,
+    "nama": "pandu",
+    "pass": "123",
+    "keranjang": []
   },
   {
-    "PASSWORD": "gin",
-    "USERNAME": "lo",
-    "ID": 2
-  },
-  {
-    "PASSWORD": "haloo",
-    "USERNAME": "aku",
-    "ID": 3
+    "ID": 2,
+    "saldo": 54500,
+    "nama": "panji",
+    "pass": "123",
+    "keranjang": []
   }
 ]

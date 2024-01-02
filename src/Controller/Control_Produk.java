@@ -3,24 +3,25 @@ package Controller;
 import Model.*;
 import Node.*;
 
-import java.io.IOException;
-
 public class Control_Produk {
-    modelProduk modelpro = new modelProduk();
-    public void addProduk(String nama, String tgl, String brand, int stok){
-        int kode = modelpro.getLastkode();
+    
+    public void addProduk(String nama, String tgl, String brand, int stok,int harga, int idUser){
+        int kode = Model.modelProduk.getLastkode();
         kode++;
-        Produk newProduk = new Produk(kode, nama, tgl, brand, stok);
-        modelpro.tambahBarang(newProduk);
-        System.out.println("berhasil ditambahkan");
+        User foundUser = Model.modelUser.getUserId(idUser);
+        if (foundUser != null) {
+            Produk newProduk = new Produk(kode, nama, tgl, brand, stok, harga, foundUser);
+            Model.modelProduk.tambahBarang(newProduk);
+            System.out.println("berhasil ditambahkan");
+        }
     }
 
     public Boolean deleteProduk(int kode) {
-        Boolean del = modelpro.delete(kode);
+        Boolean del = Model.modelProduk.delete(kode);
         if (del){
-            modelpro.commit();
+            Model.modelProduk.commit();
             System.out.println("Delete berhasil !!!");
-            modelpro.viewAllbarang();
+            Model.modelProduk.viewAllbarang();
         }else {
             System.out.println("barang tidak ketemu");
         }
@@ -28,10 +29,10 @@ public class Control_Produk {
     }
 
 //    public boolean updateProduk(int kode,String nama,String tanggal,String namabrand,int stok){
-//        Boolean up = modelpro.update(kode, nama,tanggal,namabrand,stok);
+//        Boolean up = Model.modelProduk.update(kode, nama,tanggal,namabrand,stok);
 //        if (up){
 //            System.out.println("UPDATE BERHASIL!!!");
-//            Produk produk = modelpro.getProduk(kode);
+//            Produk produk = Model.modelProduk.getProduk(kode);
 //            System.out.println("ini adalah tampilan update barang dari kode " + kode);
 //            System.out.print(produk.kode+" ");
 //            System.out.print(produk.namaBarang+" ");
@@ -45,7 +46,7 @@ public class Control_Produk {
 //    }
 
 //    public Produk Searchkode(int kode){
-//        Produk pro = modelpro.getProduk(kode);
+//        Produk pro = Model.modelProduk.getProduk(kode);
 //        if (pro != null){
 //            System.out.println("kode "+pro.getKode() +", judul buku : "+pro.getNamaBarang()+", tanggal uplod : "+pro.getTanggal()+", Nama Brand : "+pro.getNamaBrand()+", Stok : "+pro.getStok());
 //        } else {

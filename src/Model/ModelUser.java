@@ -3,22 +3,22 @@ import Node.*;
 import modelJSON.*;
 
 import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.reflect.*;
 
 public class ModelUser {
     public ArrayList<User> listUser;
 
-    modelJSon_User modelJSonUser ;
+    ModelJSON<User> modelJSonUser ;
 
     public ModelUser(){
-        modelJSonUser = new modelJSon_User();
+        modelJSonUser = new ModelJSON<>("src/Database/User.json");
         listUser = new ArrayList<>();
         loadProduk();
     }
     //create dan update
 
     public void loadProduk(){
-        listUser = modelJSonUser.readJSONtofile();
+        listUser = modelJSonUser.readFromFile(new TypeToken<ArrayList<User>>() {}.getType());
     }
 
     public int getLasIdUser(){
@@ -31,7 +31,7 @@ public class ModelUser {
         return id;
     }
 
-    public User getUser(int id){
+    public User getUserId(int id){
         User user = null;
         for (User use : listUser){
             if (use.getID() == id){
@@ -41,9 +41,19 @@ public class ModelUser {
         return user;
     }
 
+    public User getUserName(String username){
+        User user = null;
+        for (User use : listUser){
+            if (use.getNama().equals(username)){
+                return use;
+            }
+        }
+        return user;
+    }
+
 
     public boolean updateNmUser(int id,String name){
-        User user = getUser(id);
+        User user = getUserId(id);
         if (user != null){
             user.setNama(name);
             return true;
@@ -52,7 +62,7 @@ public class ModelUser {
     }
 
     public boolean updatePASS(int id,String pw){
-        User user = getUser(id);
+        User user = getUserId(id);
         if (user.getID() == id){
             user.setPass(pw);
             return true;
@@ -62,7 +72,7 @@ public class ModelUser {
 
     public void createUser(User user){
         listUser.add(user);
-        modelJSonUser.writefiletoJSON(listUser);
+        modelJSonUser.writeToFile(listUser);
     }
 
     public void viewALLuser() {
@@ -75,12 +85,15 @@ public class ModelUser {
         }
     }
 
-    public void commit(){
-        modelJSonUser.writefiletoJSON(listUser);
+    public void  updateSaldo(int id,int Saldo){
+        User user = getUserId(id);
+        if (user != null) {
+            user.setSaldo(Saldo);
+            modelJSonUser.writeToFile(listUser);
+        }
     }
 
-
-
-
-
+    public void commit(){
+        modelJSonUser.writeToFile(listUser);
+    }
 }

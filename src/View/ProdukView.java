@@ -21,8 +21,10 @@ public class ProdukView {
         String br = scan.nextLine();
         System.out.println("Masukkan jumlah stok barang : ");
         int sk = scan.nextInt();
+        System.out.println("Berapa harga barang : ");
+        int hg = scan.nextInt();
         scan.nextLine();
-        controlProduk.addProduk(nb,tg,br,sk);
+        controlProduk.addProduk(nb,tg,br,sk,hg, 1);
         modelpro.viewAllbarang();
     }
 

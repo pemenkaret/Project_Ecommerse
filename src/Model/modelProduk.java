@@ -1,24 +1,24 @@
 package Model;
 import Node.*;
+import com.google.gson.reflect.TypeToken;
 import modelJSON.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class modelProduk {
   //tambah data,hapus,update
     public ArrayList<Produk> listproduk;
-    modelJSon_Produk modelJSon_produk;
+  ModelJSON<Produk> modelJSon_produk;
 
 
     public modelProduk(){
       listproduk = new ArrayList<>();
-      modelJSon_produk = new modelJSon_Produk();
+      modelJSon_produk = new ModelJSON<>("src/Database/Produk.json");
       loadProduk();
     }
 
     public void loadProduk(){
-      listproduk = modelJSon_produk.readJSON();
+      listproduk = modelJSon_produk.readFromFile(new TypeToken<ArrayList<Produk>>() {}.getType());;
     }
 
 //    public ArrayList<Produk> GetProduk(){
@@ -31,22 +31,21 @@ public class modelProduk {
     }
 
     public void commit(){
-      modelJSon_produk.writefileJSON(listproduk);
+      modelJSon_produk.writeToFile(listproduk);
     }
 
     public Produk getProduk(int kode){
-      Produk produks = null;
       for (Produk produk: listproduk){
-        if(produk.getKode()==kode){
+        if(produk.getKode() == kode){
           return produk;
         }
       }
-      return produks;
+      return null;
     }
 
   public void tambahBarang(Produk nodeProduk) {
       listproduk.add(nodeProduk);
-    modelJSon_produk.writefileJSON(listproduk);
+    modelJSon_produk.writeToFile(listproduk);
   }
 
 
@@ -71,12 +70,13 @@ public class modelProduk {
       return false;
     }
 
-    public void viewAllbarang() {
+    public boolean viewAllbarang() {
       for (int i = 0; i < listproduk.size(); i++) {
         loadProduk();
         listproduk.get(i).viewProduk();
         System.out.println("-----------------");
       }
+        return false;
     }
 
   // Metode untuk mengupdate nama barang
@@ -117,6 +117,24 @@ public class modelProduk {
       return true;
     }
     return false;
+  }
+
+  public boolean updateHargabarang(int kode,int Harga){
+      Produk pro = getProduk(kode);
+      if (pro !=null){
+        pro.setHarga(Harga);
+        return true;
+      }
+      return false;
+  }
+
+  public boolean kurangiProduk(int id, int jumlah){
+      Produk pro = getProduk(id);
+      if (pro != null){
+        pro.setStok(pro.getStok() - jumlah);
+        return true;
+      }
+      return false;
   }
 
 

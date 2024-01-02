@@ -17,7 +17,7 @@
         <jarDirectory url="file://$USER_HOME$/Downloads/Compressed/jar_files" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../gson-2.10.1.jar!/" />

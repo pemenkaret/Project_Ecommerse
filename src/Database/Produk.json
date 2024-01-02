@@ -1,2 +1,43 @@
-[{"nama_brand":"WHITE","nama_barang":"Bantal","Stok":3,"Tanggal":"2 maret","kode barang":1},
-  {"nama_brand":"KUWI","nama_barang":"Kopi Susu","Stok":6,"Tanggal":"5 januari", "kode barang":2}]
+[
+  {
+    "Stok": 3,
+    "kode": 0,
+    "harga": 500,
+    "namaBarang": "Sabun Mandi",
+    "tanggal": "23",
+    "namaBrand": "Anjay",
+    "user": {
+      "ID": 1,
+      "saldo": 5000,
+      "nama": "pandu",
+      "pass": "123"
+    }
+  },
+  {
+    "Stok": 7,
+    "kode": 1,
+    "harga": 1000,
+    "namaBarang": "Sikat gigi",
+    "tanggal": "56",
+    "namaBrand": "SASSA",
+    "user": {
+      "ID": 1,
+      "saldo": 5000,
+      "nama": "pandu",
+      "pass": "123"
+    }
+  },{
+  "Stok": 6,
+  "kode": 2,
+  "harga": 700,
+  "namaBarang": "Minyak",
+  "tanggal": "78",
+  "namaBrand": "GAGA",
+  "user": {
+    "ID": 1,
+    "saldo": 5000,
+    "nama": "pandu",
+    "pass": "123"
+  }
+}
+]

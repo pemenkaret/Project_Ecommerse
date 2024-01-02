@@ -1,14 +1,13 @@
 package View;
-import Controller.Control_Produk;
 import Controller.Control_User;
 import Node.*;
 import Model.*;
-import modelJSON.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class UserView {
-    ModelUser modus = new ModelUser();
     Scanner scan = new Scanner(System.in);
     Control_User con = new Control_User();
 
@@ -20,16 +19,16 @@ public class UserView {
         System.out.println("Masukkan password : ");
         String pw = scan.nextLine();
         con.addUser(nm,pw);
-        modus.viewALLuser();
+        Model.modelUser.viewALLuser();
     }
 
     public void UpdateUSER(){
         System.out.println("----- Ganti username atau pasword --------");
-        modus.viewALLuser();
+        Model.modelUser.viewALLuser();
         int id = 0;
         System.out.println("Masukkan Id user yang ingin di UPDATE : ");
         id = scan.nextInt();
-        User user = modus.getUser(id);
+        User user = Model.modelUser.getUserId(id);
         if ( user != null){
             System.out.println("ID USER DITEMUKAN!!");
             if (id != -1){
@@ -44,25 +43,40 @@ public class UserView {
                     case 1 :
                         System.out.println("Masukkan username baru : ");
                         String us = scan.nextLine();
-                        modus.updateNmUser(id,us);
+                        Model.modelUser.updateNmUser(id,us);
                         System.out.println("update berhasil!!");
-                        modus.commit();
+                        Model.modelUser.commit();
                         break;
                     case 2 :
                         System.out.println("Masukkan password baru : ");
                         String pass = scan.nextLine();
-                        modus.updatePASS(id,pass);
+                        Model.modelUser.updatePASS(id,pass);
                         System.out.println("PASSWORD TELAH DIGANTI!!");
-                        modus.commit();
+                        Model.modelUser.commit();
                         break;
                 }
                 System.out.println("===========");
                 System.out.println("Setelah diupdate : ");
-                modus.listUser.get(id-1).viewUser();
-                modus.commit();
+                Model.modelUser.listUser.get(id-1).viewUser();
+                Model.modelUser.commit();
             }
         }else {
             System.out.println("Barang tidak ketemuu");
         }
     }
+
+    public void showKeranjang(ArrayList<Keranjang> keranjangs){
+        System.out.println("======== LIST KERANJANG ===============");
+        for (Keranjang barang: keranjangs) {
+            System.out.println("Produk : " + barang.barang.getNamaBarang());
+            System.out.println("jumlah : " + barang.jumlah);
+            System.out.println("harga per barang : "+ barang.barang.getHarga());
+            System.out.println("=========");
+        }
+    }
+
+
+//    public void cekLOGIN(){
+//
+//    }
 }
